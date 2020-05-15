@@ -1,9 +1,11 @@
-package com.startjava.lesson_2.game;
+package com.startjava.lesson_2_3_4.game;
 
 class Player {
 	private String name;
 	private int number;
-		
+	int[] arrayOne = new int[10];
+	int[] arrayTwo = new int[10];
+
 	public Player(String name) {
 		this.name = name;
 	}
@@ -23,4 +25,5 @@ class Player {
 	public void setNumber(int number) {
 		this.number = number;
 	}
+
 }

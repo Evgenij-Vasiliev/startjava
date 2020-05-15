@@ -1,5 +1,4 @@
-package com.startjava.lesson_2.calculator;
-
+package com.startjava.lesson_2_3_4.calculator;
 
 class Calculator {
 	

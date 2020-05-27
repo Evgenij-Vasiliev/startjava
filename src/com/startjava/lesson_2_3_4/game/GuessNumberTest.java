@@ -7,13 +7,14 @@ class GuessNumberTest {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Первый игрок введите Ваше имя: ");
 		Player playerOne = new Player(scan.next());
-		System.out.println("Первого играка зовут: " + playerOne.getName());
+		System.out.println("Первого играка зовут: " + playerOne.name);
 		System.out.println("Второй игрок введите Ваше имя: ");
 		Player playerTwo = new Player(scan.next());
-		System.out.println("Второго игрока зовут: " + playerTwo.getName());
+		System.out.println("Второго игрока зовут: " + playerTwo.name);
 
 		GuessNumber game = new GuessNumber(playerOne, playerTwo);
-		String answer;
+
+		String answer = "yes";
 		do {
 			game.startGame();
 			System.out.println("Game over");
@@ -24,5 +25,4 @@ class GuessNumberTest {
 		} while(answer.equals("yes"));
 	}
 }
-
 

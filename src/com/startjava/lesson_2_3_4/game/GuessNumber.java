@@ -5,18 +5,54 @@ import java.util.Scanner;
 
 class GuessNumber {
 	Scanner scan = new Scanner(System.in);
-	Player playerOne;
-	Player playerTwo;
-	int concealedNumber;
-	int count;
+	private Player playerOne;
+	private Player playerTwo;
+	private int concealedNumber;
+	private int count;
 
-	public void numberInput(Player player) {
-		System.out.println(player.name + " назовите число: ");
-		player.number = scan.nextInt();
-		System.out.println(player.name + " назвал число: " + player.number);
+	GuessNumber(Player playerOne, Player playerTwo) {
+		this.playerOne = playerOne;
+		this.playerTwo = playerTwo;
 	}
 
-	public  void compare(Player player) {
+	public void startGame () {
+		System.out.println("Начало игры");
+		System.out.println("Компьютер загадает число от 0 до 100 ");
+		System.out.println("игроки по очереди будут пытаться угадать число, загаданное компьютером");
+		System.out.println("У каждого игрока 10 попыток");
+		concealedNumber = (int) (Math.random() * 100);
+		for (count = 0; count < 10; count++) {
+			numberInput(playerOne);
+			compare(playerOne);
+			playerAnswers(playerOne);
+			playerAnswers(playerTwo);
+			if(playerOne.getNumber() == concealedNumber) {
+				break;
+			}
+			numberInput(playerTwo);
+			compare(playerTwo);
+			playerAnswers(playerTwo);
+			playerAnswers(playerOne);
+			if(playerTwo.getNumber() == concealedNumber) {
+				break;
+			}
+		}
+	}
+	private void playerAnswers(Player player) {
+		System.out.print("Все числа, которые ввел " + player.getName() + " - ");
+		int[] arrayCopy = Arrays.copyOf(player.getEnteredNumbers(), (count + 1));
+		System.out.println(Arrays.toString(arrayCopy));
+		Arrays.fill(arrayCopy, 0);
+	}
+
+	private void numberInput(Player player) {
+		System.out.println(player.getName() + " назовите число: ");
+		player.setNumber(scan.nextInt());
+		player.getEnteredNumbers()[count] = player.getNumber();
+		System.out.println(player.getName() + " назвал число: " + player.getNumber());
+	}
+
+	private   void compare(Player player) {
 		if(player.getNumber() > concealedNumber) {
 			System.out.println("Ваше число " + player.getNumber() + " больше загаданного, " +
 					"у Вас осталось " + (10 - 1 - count) + " попыток(ки, ка)");
@@ -32,42 +68,6 @@ class GuessNumber {
 		} else {
 			System.out.println(player.getName() + " Вы угадали, загаданное число " + concealedNumber +
 					" с(со) " + (count + 1) + " попытки");
-
-			System.out.print("Все числа, которые ввел " + playerOne.getName() + " - ");
-			int[] arrayOneCopy = Arrays.copyOf(playerOne.getEnteredNumbers(), (count + 1));
-			System.out.println(Arrays.toString(arrayOneCopy));
-			Arrays.fill(arrayOneCopy, 0);
-			System.out.print("Все числа, которые ввел " + playerTwo.getName() + " - ");
-			int[] arrayTwoCopy = Arrays.copyOf(playerTwo.getEnteredNumbers(), count);
-			System.out.println(Arrays.toString(arrayTwoCopy));
-			Arrays.fill(arrayTwoCopy, 0);
-		}
-	}
-
-	GuessNumber(Player playerOne, Player playerTwo) {
-		this.playerOne = playerOne;
-		this.playerTwo = playerTwo;
-	}
-
-	public void startGame () {
-
-		System.out.println("Начало игры");
-		System.out.println("Компьютер загадает число от 0 до 100 ");
-		System.out.println("игроки по очереди будут пытаться угадать число, загаданное компьютером");
-		System.out.println("У каждого игрока 10 попыток");
-		concealedNumber = (int) (Math.random() * 100);
-
-		for (count = 0; count < 10; count++) {
-			numberInput(playerOne);
-			compare(playerOne);
-			if(playerOne.getNumber() == concealedNumber) {
-				break;
-			}
-			numberInput(playerTwo);
-			compare(playerTwo);
-			if(playerTwo.getNumber() == concealedNumber) {
-				break;
-			}
 		}
 	}
 }

@@ -20,54 +20,51 @@ class GuessNumber {
 		System.out.println("Компьютер загадает число от 0 до 100 ");
 		System.out.println("игроки по очереди будут пытаться угадать число, загаданное компьютером");
 		System.out.println("У каждого игрока 10 попыток");
-		concealedNumber = (int) (Math.random() * 100);
+		concealedNumber = (int) (Math.random() * 100 + 1);
 		for (count = 0; count < 10; count++) {
-			numberInput(playerOne);
+			inputNumber(playerOne);
 			compare(playerOne);
-			playerAnswers(playerOne);
-			playerAnswers(playerTwo);
+			printAnswers(playerOne);
+			printAnswers(playerTwo);
 			if(playerOne.getNumber() == concealedNumber) {
 				break;
 			}
-			numberInput(playerTwo);
+			inputNumber(playerTwo);
 			compare(playerTwo);
-			playerAnswers(playerTwo);
-			playerAnswers(playerOne);
+			printAnswers(playerTwo);
+			printAnswers(playerOne);
 			if(playerTwo.getNumber() == concealedNumber) {
 				break;
 			}
 		}
 	}
-	private void playerAnswers(Player player) {
-		System.out.print("Все числа, которые ввел " + player.getName() + " - ");
-		int[] arrayCopy = Arrays.copyOf(player.getEnteredNumbers(), (count + 1));
-		System.out.println(Arrays.toString(arrayCopy));
-		Arrays.fill(arrayCopy, 0);
-	}
-
-	private void numberInput(Player player) {
+	private void inputNumber(Player player) {
 		System.out.println(player.getName() + " назовите число: ");
 		player.setNumber(scan.nextInt());
 		player.getEnteredNumbers()[count] = player.getNumber();
 		System.out.println(player.getName() + " назвал число: " + player.getNumber());
 	}
 
-	private   void compare(Player player) {
+	private void compare(Player player) {
 		if(player.getNumber() > concealedNumber) {
 			System.out.println("Ваше число " + player.getNumber() + " больше загаданного, " +
 					"у Вас осталось " + (10 - 1 - count) + " попыток(ки, ка)");
-			if (count == 9) {
-				System.out.println(player.getName() + " у Вас закончились попытки");
-			}
 		} else if(player.getNumber() < concealedNumber) {
-			System.out.println("Ваше число " + player.getNumber() + " меньше загаданного, "+
-					"у Вас осталось " + (10 - 1 - count) + " попыток(ки, ка)");
-			if (count == 9) {
-				System.out.println(player.getName() + " у Вас закончились попытки");
-			}
+			System.out.println("Ваше число " + player.getNumber() + " меньше загаданного, ");
+			System.out.println("у Вас осталось " + (10 - 1 - count) + " попыток(ки, ка)");
 		} else {
 			System.out.println(player.getName() + " Вы угадали, загаданное число " + concealedNumber +
 					" с(со) " + (count + 1) + " попытки");
+			}
+			if (count == 9) {
+				System.out.println(player.getName() + " у Вас закончились попытки");
 		}
+	}
+
+	private void printAnswers(Player player) {
+		System.out.print("Все числа, которые ввел " + player.getName() + " - ");
+		int[] arrayCopy = Arrays.copyOf(player.getEnteredNumbers(), (count + 1));
+		System.out.println(Arrays.toString(arrayCopy));
+		Arrays.fill(arrayCopy, 0);
 	}
 }

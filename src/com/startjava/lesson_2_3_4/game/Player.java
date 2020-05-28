@@ -30,7 +30,7 @@ class Player {
 		return enteredNumbers;
 	}
 
-	public void setEnteredNumbers(int[] enteredNumbers) {
+	public void setEnteredNumber(int[] enteredNumbers) {
 		this.enteredNumbers = enteredNumbers;
 	}
 }

@@ -24,15 +24,15 @@ class GuessNumber {
 		for (count = 0; count < 10; count++) {
 			inputNumber(playerOne);
 			compare(playerOne);
-			printAnswers(playerOne);
-			printAnswers(playerTwo);
+			outputEnteredNums(playerOne);
+			outputEnteredNums(playerTwo);
 			if(playerOne.getNumber() == concealedNumber) {
 				break;
 			}
 			inputNumber(playerTwo);
 			compare(playerTwo);
-			printAnswers(playerTwo);
-			printAnswers(playerOne);
+			outputEnteredNums(playerTwo);
+			outputEnteredNums(playerOne);
 			if(playerTwo.getNumber() == concealedNumber) {
 				break;
 			}
@@ -61,7 +61,7 @@ class GuessNumber {
 		}
 	}
 
-	private void printAnswers(Player player) {
+	private void outputEnteredNums(Player player) {
 		System.out.print("Все числа, которые ввел " + player.getName() + " - ");
 		int[] arrayCopy = Arrays.copyOf(player.getEnteredNumbers(), (count + 1));
 		System.out.println(Arrays.toString(arrayCopy));

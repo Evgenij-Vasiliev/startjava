@@ -24,27 +24,27 @@ class GuessNumber {
         for (count = 0; count < 10; count++) {
             inputNumber(playerOne);
             compare(playerOne);
-            if(isEquals) {
-                outputEnteredNums(playerOne, playerTwo);
+            if(compare(playerOne)) {
                 break;
             }
             inputNumber(playerTwo);
             compare(playerTwo);
-            if(isEquals) {
-                outputEnteredNums(playerOne, playerTwo);
+            if(compare(playerTwo)) {
                 break;
             }
         }
+        outputEnteredNums(playerOne);
+        outputEnteredNums(playerTwo);
     }
+
     private void inputNumber(Player player) {
         System.out.println(player.getName() + " назовите число: ");
         player.getEnteredNumbers()[count] = scan.nextInt();
         System.out.println(player.getName() + " назвал число: " + player.getEnteredNumbers()[count]);
     }
-    boolean isEquals = false;
-    private void compare(Player player) {
+
+    private boolean compare(Player player) {
         if(player.getEnteredNumbers()[count] != concealedNumber) {
-            isEquals = false;
             System.out.println("Вы ошиблись ");
             if(player.getEnteredNumbers()[count] > concealedNumber) {
                 System.out.println("Ваше число " + player.getEnteredNumbers()[count] + " больше загаданного, " +
@@ -55,23 +55,18 @@ class GuessNumber {
             }
         }
         else {
-            isEquals = true;
             System.out.println(player.getName() + " Вы угадали, загаданное число " + concealedNumber +
                     " с(со) " + (count + 1) + " попытки");
         }
         if (count == 9) {
             System.out.println(player.getName() + " у Вас закончились попытки");
         }
+        return true;
     }
 
-    private void outputEnteredNums(Player playerOne, Player playerTwo) {
-        System.out.print("Все числа, которые ввел " + playerOne.getName() + " - ");
-        int[] arrayCopy = Arrays.copyOf(playerOne.getEnteredNumbers(), count + 1);
+    private void outputEnteredNums(Player player) {
+        System.out.print("Все числа, которые ввел " + player.getName() + " - ");
+        int[] arrayCopy = Arrays.copyOf(player.getEnteredNumbers(), (count));
         System.out.println(Arrays.toString(arrayCopy));
-        Arrays.fill(arrayCopy, 0);
-        System.out.print("Все числа, которые ввел " + playerTwo.getName() + " - ");
-        arrayCopy = Arrays.copyOf(playerTwo.getEnteredNumbers(), count );
-        System.out.println(Arrays.toString(arrayCopy));
-        Arrays.fill(arrayCopy, 0);
     }
 }

@@ -13,9 +13,13 @@ class GuessNumberTest {
 		System.out.println("Второго игрока зовут: " + playerTwo.getName());
 
 		GuessNumber game = new GuessNumber(playerOne, playerTwo);
+        game.outputEnteredNums(playerOne);
+        game.outputEnteredNums(playerTwo);
 
 		String answer;
 		do {
+			game.outputEnteredNums(playerOne);
+			game.outputEnteredNums(playerTwo);
 			game.startGame();
 			System.out.println("Game over");
 			do {

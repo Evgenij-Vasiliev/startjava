@@ -21,7 +21,7 @@ class Player {
 		return count;
 	}
 
-	public   void setCount(int count) {
+	public  void setCount(int count) {
 		this.count = count;
 	}
 

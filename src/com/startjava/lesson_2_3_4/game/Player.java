@@ -28,4 +28,10 @@ class Player {
 	public int[] getEnteredNumbers() {
 		return enteredNumbers;
 	}
+
+	public void clear() {
+		for(int i = 0; i < 10; i++) {
+			enteredNumbers[i] = 0;
+		}
+	}
 }
